@@ -8,9 +8,12 @@ const cors = require("cors");
 require("dotenv").config();
 const port = 3000
 
+
 const admin = require("firebase-admin");
 
-const serviceAccount = require("./platshear-firebase-adminsdk-fbsvc-2e85b07163.json");
+// index.js
+const decoded = Buffer.from(process.env.FIREBASE_SERVICE_KEY, "base64").toString("utf8");
+const serviceAccount = JSON.parse(decoded);
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
@@ -36,12 +39,12 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
     await client.connect();
-    await client.db("admin").command({ ping: 1 });
+    // await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
   } finally {
   }
 }
-run().catch(console.dir);
+run()
 
 
 // api create fro allfood
