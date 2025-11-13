@@ -99,6 +99,20 @@ app.get('/food/reqlist/:id', async (req,res)=>{
       res.send(resuslt);
     });
 
+   app.patch("/food/requpdate/:id", async (req, res) => {
+      const ID = req.params.id;
+      const updatestatus = req.body;
+      const query = {
+        _id: new ObjectId(ID),
+      };
+      const update = {
+        $set: { statues: updatestatus.statues  },
+      };
+      const option = {};
+      const resuslt = await RequestFood.updateOne(query, update, option);
+      res.send(resuslt);
+    });
+
        app.delete("/food/:id", async (req, res) => {
       const ID = req.params.id;
       const query = {
