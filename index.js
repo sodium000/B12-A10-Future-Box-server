@@ -8,6 +8,15 @@ const cors = require("cors");
 require("dotenv").config();
 const port = 3000
 
+const admin = require("firebase-admin");
+
+const serviceAccount = require("./platshear-firebase-adminsdk-fbsvc-2e85b07163.json");
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount)
+});
+
+
 app.use(cors())
 app.use(express.json())
 
