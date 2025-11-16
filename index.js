@@ -65,6 +65,7 @@ app.get('/food', async (req,res)=>{
 }) 
 
 app.get('/food/myfood', async (req,res)=>{
+  console.log("header:", req.headers)
   const email = req.query.email;
   const query = {};
     if (email) {
